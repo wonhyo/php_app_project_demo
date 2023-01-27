@@ -1,0 +1,3 @@
+[submodule "php-alpine-oci8"]
+	path = php-alpine-oci8
+	url = git@github.com:wonhyo/php-alpine-oci8.git
