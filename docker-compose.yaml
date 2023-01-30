@@ -1,0 +1,49 @@
+version: '3.7'
+x-extra_hosts:
+   &default-extra_hosts
+      - "mysql:192.168.1.20"
+x-oracle_network:
+   &oracle_network
+           ./config/oracle-instanceclient/network:/usr/lib/oracle/21/client64/lib/network
+services:
+   memcached:
+      image: memcached
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
+      restart: unless-stopped
+   nginx:
+      image: nginx:alpine
+      ports:
+         - "80:80"
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
+      user: $DOCKER_USER
+      volumes:
+         - ./logs:/var/log/nginx
+         - ./run:/var/run
+         - ./cache:/var/cache/nginx
+         - ./config/nginx/conf.d:/etc/nginx/conf.d
+         - ./app:/var/www/html
+      extra_hosts: *default-extra_hosts
+      restart: unless-stopped
+   php:
+      build: images/php-alpine-oci8
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
+      user: $DOCKER_USER
+      volumes:
+         - ./config/php/php-fpm.d:/usr/local/etc/php-fpm.d
+         - ./logs:/usr/local/var/log
+         - ./app:/var/www/html
+         - *oracle_network
+      extra_hosts: *default-extra_hosts
+      restart: unless-stopped
