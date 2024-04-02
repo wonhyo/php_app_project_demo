@@ -23,6 +23,7 @@ services:
          - ./cache:/var/cache/nginx
          - ./config/nginx/conf.d:/etc/nginx/conf.d
          - ./app:/var/www/html
+         - "/etc/localtime:/etc/localtime:ro"
       extra_hosts: *default-extra_hosts
       restart: unless-stopped
    php:
@@ -33,5 +34,6 @@ services:
          - ./logs:/usr/local/var/log
          - ./app:/var/www/html
          - *oracle_network
+         - "/etc/localtime:/etc/localtime:ro"
       extra_hosts: *default-extra_hosts
       restart: unless-stopped
