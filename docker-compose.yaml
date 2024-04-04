@@ -4,10 +4,10 @@ x-extra_hosts:
       - "mysql:192.168.1.20"
 x-oracle_network:
    &oracle_network
-           ./config/oracle-instanceclient/network:/usr/lib/oracle/21/client64/lib/network
+      ./config/oracle-instanceclient/network:/usr/lib/oracle/21/client64/lib/network
 x-local_time:
    &local_time
-           "/etc/localtime:/etc/localtime:ro" 
+      "/etc/localtime:/etc/localtime:ro" 
 services:
    memcached:
      #container_name: memcached
