@@ -10,13 +10,13 @@ x-local_time:
       "/etc/localtime:/etc/localtime:ro" 
 services:
    memcached:
-     #container_name: memcached
+     #container_name: project_A_memcached
       image: docker.io/memcached
       restart: unless-stopped
       volumes:
          - *local_time   
    nginx:
-     #container_name: nginx
+     #container_name: project_A_nginx
       depends_on:
          - php
          - memcached
@@ -33,7 +33,7 @@ services:
          - ./app:/var/www/html
       restart: unless-stopped
    php:
-     #container_name: php
+     #container_name: project_A_php
       build: images/php-alpine-oci8
       user: "1000:1000"
       volumes:
@@ -42,6 +42,5 @@ services:
          - ./logs:/usr/local/var/log
          - ./app:/var/www/html
          - *oracle_network
-         - "/etc/localtime:/etc/localtime:ro"
       extra_hosts: *default-extra_hosts
       restart: unless-stopped

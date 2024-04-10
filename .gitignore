@@ -2,3 +2,5 @@
 cache/*
 !dummy
 *.pid
+*.pp
+*.te
