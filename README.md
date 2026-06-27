@@ -3,7 +3,6 @@ PHP Web Applicatoin Project docker Template
 
 To use 
 
-echo 'export DOCKER_USER="$(id -u):$(id -g)"' >> ~/.bash_profile
+UPDATE .env
 
-source ~/.bash_profile
-
+and build php image from https://github.com/wonhyo/php-alpine-oci8
