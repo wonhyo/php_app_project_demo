@@ -4,6 +4,9 @@ x-extra_hosts:
 x-oracle_network:
    &oracle_network
       ./config/oracle-instanceclient/network:/usr/lib/oracle/21/client64/lib/network
+x-tns_admin:
+   &tns_admin
+      - TNS_ADMIN=/usr/lib/oracle/21/client64/lib/network/admin
 x-local_time:
    &local_time
       "/etc/localtime:/etc/localtime:ro" 
@@ -34,7 +37,7 @@ services:
       restart: unless-stopped
    php:
       container_name: project_A_php
-      image: php:8.4-alpine-oci8
+      image: php:8.4-fpm-alpine-oci8
       user: "${UID}:${GID}"
       volumes:
          - *local_time
@@ -44,3 +47,6 @@ services:
          - *oracle_network
       extra_hosts: *default-extra_hosts
       restart: unless-stopped
+      environment:
+         - *tns_admin
+
