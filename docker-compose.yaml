@@ -6,7 +6,7 @@ x-oracle_network:
       ./config/oracle-instanceclient/network:/usr/lib/oracle/21/client64/lib/network
 x-tns_admin:
    &tns_admin
-      - TNS_ADMIN=/usr/lib/oracle/21/client64/lib/network/admin
+      TNS_ADMIN=/usr/lib/oracle/21/client64/lib/network/admin
 x-local_time:
    &local_time
       "/etc/localtime:/etc/localtime:ro" 
